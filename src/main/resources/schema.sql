@@ -7,20 +7,9 @@ CREATE USER 'library_admin' IDENTIFIED BY '1234';
 
 GRANT ALL ON library.* TO 'library_admin';
 
-DROP TABLE IF EXISTS books,
-                     addresses,
-                     libraries,
-                     books_at_libraries, 
-                     members, 
-                     books_at_members,
-                     categories,
-                     books_at_categories,
-                     authors;
-
 CREATE TABLE addresses (
     id	INT         			NOT NULL AUTO_INCREMENT,
-    street   VARCHAR(256)    	NOT NULL,
-    home_no	CHAR(10)			NOT NULL,
+    address   VARCHAR(256)    	NOT NULL,
     city VARCHAR(256) 			NOT NULL,
     postal_code CHAR (6),
     PRIMARY KEY (id)
@@ -60,7 +49,7 @@ CREATE TABLE books_at_libraries (
     FOREIGN KEY (library_id) 	REFERENCES libraries (id)
 );
 
-CREATE TABLE members (
+CREATE TABLE users (
     id	INT             		NOT NULL AUTO_INCREMENT,
     address_id INT				NOT NULL,
     first_name	VARCHAR(256)    NOT NULL,
@@ -72,12 +61,12 @@ CREATE TABLE members (
     FOREIGN KEY (address_id) 	REFERENCES addresses (id) ON DELETE CASCADE
 );
 
-CREATE TABLE books_at_members (
+CREATE TABLE books_at_users (
     isbn INT     				NOT NULL,
-    member_id	INT				NOT NULL,
-    PRIMARY KEY (isbn,member_id),
+    user_id	INT				NOT NULL,
+    PRIMARY KEY (isbn,user_id),
     FOREIGN KEY (isbn) 			REFERENCES books (isbn),
-    FOREIGN KEY (member_id) 	REFERENCES members (id)
+    FOREIGN KEY (user_id) 	REFERENCES users (id)
 );
 
 CREATE TABLE categories (
