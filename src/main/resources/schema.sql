@@ -25,7 +25,7 @@ CREATE TABLE authors (
 );
 
 CREATE TABLE books (
-    isbn	BIGINT(11) SIGNED   NOT NULL,
+    isbn	VARCHAR(11)   		NOT NULL,
     author_id INT				NOT NULL,
     title  VARCHAR(256)     	NOT NULL,
     publish_date  DATE,
@@ -42,7 +42,7 @@ CREATE TABLE libraries (
 );
 
 CREATE TABLE books_at_libraries (
-    isbn BIGINT(11) SIGNED     	NOT NULL,
+    isbn VARCHAR(11)     		NOT NULL,
     library_id	INT				NOT NULL,
     PRIMARY KEY (isbn,library_id),
     FOREIGN KEY (isbn) 			REFERENCES books (isbn),
@@ -62,7 +62,7 @@ CREATE TABLE users (
 );
 
 CREATE TABLE books_at_users (
-    isbn BIGINT(11) SIGNED     	NOT NULL,
+    isbn VARCHAR(11)     		NOT NULL,
     user_id	INT					NOT NULL,
     PRIMARY KEY (isbn,user_id),
     FOREIGN KEY (isbn) 			REFERENCES books (isbn),
@@ -76,7 +76,7 @@ CREATE TABLE categories (
 );
 
 CREATE TABLE books_at_categories (
-    isbn BIGINT(11) SIGNED     	NOT NULL,
+    isbn VARCHAR(11)     		NOT NULL,
     category_id	INT				NOT NULL,
     PRIMARY KEY (isbn,category_id),
     FOREIGN KEY (isbn) 			REFERENCES books (isbn),

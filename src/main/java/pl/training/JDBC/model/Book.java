@@ -8,7 +8,7 @@ import java.util.List;
  */
 public class Book {
 
-    private int isbn;
+    private String isbn;
 
     private Author author;
 
@@ -22,5 +22,13 @@ public class Book {
     private List<Library> libraries;
 
     private List<Category> categories;
+
+//    public Book(String isbn, Author author, String title, Date date){
+//
+//        this.isbn = isbn;
+//        this.author = author;
+//        this.title = title;
+//        this.publishDate = date;
+//    }
 
 }
