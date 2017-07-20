@@ -13,17 +13,17 @@ public class User {
 
     private Address address;
 
-    private String name;
+    private String firstName;
 
-    private String surName;
+    private String lastName;
 
     private Gender gender;
 
     private String eMail;
 
-    private String phoneNumber;
+    private String phoneNo;
+
 
     private List<Book> books;
-
 
 }

@@ -11,9 +11,9 @@ public class Library {
 
     private Address address;
 
-    private String name;
+    private String libName;
+
 
     private List<Book> books;
-
 
 }

@@ -9,11 +9,12 @@ public class Author {
 
     private int id;
 
-    private String name;
-
-    private String surName;
-
     private Address address;
+
+    private String firstName;
+
+    private String lastName;
+
 
     private List<Book> books;
 }

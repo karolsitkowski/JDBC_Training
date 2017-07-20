@@ -12,20 +12,15 @@ public class Book {
 
     private Author author;
 
-    private Address address;
-
     private String title;
 
     private Date publishDate;
+
 
     private List<User> users;
 
     private List<Library> libraries;
 
     private List<Category> categories;
-
-
-
-
 
 }

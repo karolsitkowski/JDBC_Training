@@ -1,6 +1,6 @@
 DROP DATABASE IF EXISTS library;
 DROP USER IF EXISTS 'library_admin';
-CREATE DATABASE IF NOT EXISTS library;
+CREATE DATABASE IF NOT EXISTS library CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE library;
 
 CREATE USER 'library_admin' IDENTIFIED BY '1234';
@@ -25,7 +25,7 @@ CREATE TABLE authors (
 );
 
 CREATE TABLE books (
-    isbn      INT             	NOT NULL AUTO_INCREMENT,
+    isbn	BIGINT(11) SIGNED   NOT NULL,
     author_id INT				NOT NULL,
     title  VARCHAR(256)     	NOT NULL,
     publish_date  DATE,
@@ -42,7 +42,7 @@ CREATE TABLE libraries (
 );
 
 CREATE TABLE books_at_libraries (
-    isbn INT     				NOT NULL,
+    isbn BIGINT(11) SIGNED     	NOT NULL,
     library_id	INT				NOT NULL,
     PRIMARY KEY (isbn,library_id),
     FOREIGN KEY (isbn) 			REFERENCES books (isbn),
@@ -62,11 +62,11 @@ CREATE TABLE users (
 );
 
 CREATE TABLE books_at_users (
-    isbn INT     				NOT NULL,
-    user_id	INT				NOT NULL,
+    isbn BIGINT(11) SIGNED     	NOT NULL,
+    user_id	INT					NOT NULL,
     PRIMARY KEY (isbn,user_id),
     FOREIGN KEY (isbn) 			REFERENCES books (isbn),
-    FOREIGN KEY (user_id) 	REFERENCES users (id)
+    FOREIGN KEY (user_id) 		REFERENCES users (id)
 );
 
 CREATE TABLE categories (
@@ -76,7 +76,7 @@ CREATE TABLE categories (
 );
 
 CREATE TABLE books_at_categories (
-    isbn INT     				NOT NULL,
+    isbn BIGINT(11) SIGNED     	NOT NULL,
     category_id	INT				NOT NULL,
     PRIMARY KEY (isbn,category_id),
     FOREIGN KEY (isbn) 			REFERENCES books (isbn),
