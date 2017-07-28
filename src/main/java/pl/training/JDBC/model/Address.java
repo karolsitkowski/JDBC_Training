@@ -5,6 +5,8 @@ package pl.training.JDBC.model;
  */
 public class Address {
 
+    final String [] columns = {"id", "address", "city", "postal_code"};
+
     private int id;
 
     private String address;
@@ -12,6 +14,11 @@ public class Address {
     private String city;
 
     private String postalCode;
+
+
+    public String[] getColumns() {
+        return columns;
+    }
 
     public int getId() {
         return id;
