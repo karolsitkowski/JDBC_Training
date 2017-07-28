@@ -1,5 +1,7 @@
 package pl.training.JDBC.model;
 
+import java.util.Arrays;
+
 /**
  * Created by sit0 on 18.07.17.
  */
@@ -52,4 +54,11 @@ public class Address {
         this.postalCode = postalCode;
     }
 
+    @Override
+    public String toString() {
+        return  "id=" + id +
+                ", address='" + address + '\'' +
+                ", city='" + city + '\'' +
+                ", postalCode='" + postalCode + '\'';
+    }
 }
