@@ -16,4 +16,42 @@ public class Library {
 
     private List<Book> books;
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public String getLibName() {
+        return libName;
+    }
+
+    public void setLibName(String libName) {
+        this.libName = libName;
+    }
+
+    public List<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(List<Book> books) {
+        this.books = books;
+    }
+
+    @Override
+    public String toString() {
+        return  "Name='" + libName + '\'' +
+                " address=["  + address + ']' +
+                " books=" + books;
+    }
 }

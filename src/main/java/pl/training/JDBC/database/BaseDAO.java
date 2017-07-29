@@ -11,7 +11,7 @@ public abstract class BaseDAO<T> {
 
     public abstract String getTableName();
 
-    public abstract T createClass(ResultSet result) throws SQLException;
+    public abstract T createObject(ResultSet result) throws SQLException;
 
     public List<T> findAll(){
 
@@ -24,7 +24,7 @@ public abstract class BaseDAO<T> {
             ResultSet result = statement.executeQuery(sql);) {
 
             while (result.next()){
-                T value = createClass(result);
+                T value = createObject(result);
                 values.add(value);
             }
 
@@ -45,7 +45,7 @@ public abstract class BaseDAO<T> {
             statement.setInt(1,id);
             try(ResultSet result = statement.executeQuery()){
                 if(result.next()){
-                    value = createClass(result);
+                    value = createObject(result);
                 }
             }
         } catch (SQLException ex){

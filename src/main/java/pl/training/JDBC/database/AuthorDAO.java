@@ -11,11 +11,13 @@ import java.sql.SQLException;
  */
 public class AuthorDAO extends BaseDAO<Author> {
 
+    @Override
     public String getTableName(){
         return "authors";
     }
 
-    public Author createClass(ResultSet result) throws SQLException{
+    @Override
+    public Author createObject(ResultSet result) throws SQLException{
 
         Author author = new Author();
         author.setId(result.getInt(1));

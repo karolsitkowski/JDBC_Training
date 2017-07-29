@@ -10,11 +10,13 @@ import java.sql.SQLException;
  */
 public class AddressDAO extends BaseDAO<Address>  {
 
+    @Override
     public String getTableName(){
         return "addresses";
     }
 
-    public Address createClass(ResultSet result) throws SQLException{
+    @Override
+    public Address createObject(ResultSet result) throws SQLException{
 
         Address address = new Address();
         address.setId(result.getInt(1));
