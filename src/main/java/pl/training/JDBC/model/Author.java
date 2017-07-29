@@ -1,11 +1,14 @@
 package pl.training.JDBC.model;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
  * Created by sit0 on 18.07.17.
  */
 public class Author {
+
+    final String[] columns = {"id", "address_id", "first_name", "last_name"};
 
     private int id;
 
@@ -16,6 +19,10 @@ public class Author {
     private String lastName;
 
     private List<Book> books;
+
+    public String[] getColumns() {
+        return columns;
+    }
 
     public int getId() {
         return id;
@@ -55,5 +62,13 @@ public class Author {
 
     public void setBooks(List<Book> books) {
         this.books = books;
+    }
+
+    @Override
+    public String toString() {
+        return  "firstName='" + firstName + '\'' +
+                " lastName='" + lastName + '\'' +
+                " address=["  + address + ']' +
+                " books=" + books;
     }
 }

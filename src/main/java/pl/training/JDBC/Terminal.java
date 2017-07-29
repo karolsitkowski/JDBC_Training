@@ -2,7 +2,10 @@ package pl.training.JDBC;
 
 import com.sun.org.apache.xpath.internal.SourceTree;
 import pl.training.JDBC.database.AddressDAO;
+import pl.training.JDBC.database.AuthorDAO;
 import pl.training.JDBC.database.ConnectionFactory;
+import pl.training.JDBC.manager.AddressManager;
+import pl.training.JDBC.manager.AuthorManager;
 import pl.training.JDBC.model.Address;
 import pl.training.JDBC.model.Author;
 import pl.training.JDBC.model.Book;
@@ -20,14 +23,35 @@ public class Terminal {
 
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
 
-        AddressDAO addressDAO = new AddressDAO();
-        List<Address> addresses = addressDAO.findAll();
-        System.out.println("Adresses: ");
-        for (Address address : addresses){
-            System.out.println(address);
+
+        AddressManager addressManager = new AddressManager();
+        AuthorManager authorManager = new AuthorManager();
+        Scanner scanner = new Scanner(System.in);
+        boolean runner = true;
+
+        while(runner){
+            System.out.print("Select class <address, author>: " );
+            String classSelect = scanner.next();
+            switch (classSelect){
+                case "address":{
+
+                    addressManager.manage(scanner);
+                    break;
+                }
+
+                case "author":{
+
+                    authorManager.manage(scanner);
+
+                }
+            }
         }
+
+
+
+
+
 
 
 

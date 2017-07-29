@@ -56,9 +56,8 @@ public class Address {
 
     @Override
     public String toString() {
-        return  "id=" + id +
-                ", address='" + address + '\'' +
-                ", city='" + city + '\'' +
-                ", postalCode='" + postalCode + '\'';
+        return  "street='" + address + '\'' +
+                " city='" + city + '\'' +
+                " postalCode='" + postalCode + '\'';
     }
 }
