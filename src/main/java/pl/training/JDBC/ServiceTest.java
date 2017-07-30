@@ -2,9 +2,11 @@ package pl.training.JDBC;
 
 import pl.training.JDBC.database.ConnectionFactory;
 import pl.training.JDBC.model.Address;
+import pl.training.JDBC.model.Book;
 
 import java.sql.*;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -65,6 +67,7 @@ public class ServiceTest {
         return addresses;
     }
 
+
     //PreparedStatement training
     private Address addressById(Connection connection, int id) {
 
@@ -89,5 +92,28 @@ public class ServiceTest {
             System.out.println(ex);
         }
         return address;
+    }
+
+    public Set<String> books_at_categories(int id) {
+
+        Set<String> isbns = new HashSet<>();
+
+        String sql = "select isbn from books_at_categories where category_id = ?";
+
+        try(Connection connection = ConnectionFactory.createConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);){
+            preparedStatement.setInt(1, id);
+            try (ResultSet result = preparedStatement.executeQuery();) {
+                System.out.println(preparedStatement.toString());
+                while (result.next()) {
+                    isbns.add(result.getString(1));
+                }
+            }
+
+        } catch (SQLException ex){
+            System.out.println(ex);
+        }
+
+        return isbns;
     }
 }

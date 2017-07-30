@@ -87,6 +87,6 @@ public class Book {
                 " publishDate=" + publishDate +
                 " users=" + users +
                 " libraries=" + libraries +
-                " categories=" + categories;
+                " categories=" + categories +"\n";
     }
 }
