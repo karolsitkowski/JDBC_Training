@@ -11,7 +11,7 @@ import java.util.Set;
 /**
  * Created by sit0 on 28.07.17.
  */
-public class Training {
+public class ServiceTest {
 
     public void executeTest(){
         Set<Address> addresses;

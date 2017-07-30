@@ -15,7 +15,7 @@ public abstract class BaseManager <T,D extends BaseDAO<T>> {
 
     public void manage(Scanner scanner){
 
-        System.out.println("Select command:<list,find>");
+        System.out.print("Select command <list,find>: ");
         String cmd = scanner.next();
 
         switch (cmd){

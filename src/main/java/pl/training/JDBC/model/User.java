@@ -7,7 +7,7 @@ import java.util.List;
  */
 public class User {
 
-    public enum Gender {male,female}
+    public enum Gender {Male,Female}
 
     private int id;
 
@@ -26,4 +26,78 @@ public class User {
 
     private List<Book> books;
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
+    }
+
+    public String geteMail() {
+        return eMail;
+    }
+
+    public void setEmail(String eMail) {
+        this.eMail = eMail;
+    }
+
+    public String getPhoneNo() {
+        return phoneNo;
+    }
+
+    public void setPhoneNo(String phoneNo) {
+        this.phoneNo = phoneNo;
+    }
+
+    public List<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(List<Book> books) {
+        this.books = books;
+    }
+
+    @Override
+    public String toString() {
+        return  "firstName='" + firstName + '\'' +
+                " lastName='" + lastName + '\'' +
+                " address=[" + address + "]" +
+                " gender=" + gender +
+                " eMail='" + eMail + '\'' +
+                " phoneNo='" + phoneNo + '\'' +
+                " books=" + books;
+    }
 }

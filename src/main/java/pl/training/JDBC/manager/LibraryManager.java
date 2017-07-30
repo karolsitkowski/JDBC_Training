@@ -12,6 +12,4 @@ public class LibraryManager extends BaseManager<Library,LibraryDAO> {
         dao = new LibraryDAO();
     }
 
-    //LibraryDAO dao = new LibraryDAO();
-
 }
