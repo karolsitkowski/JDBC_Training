@@ -29,11 +29,12 @@ public class Terminal {
         LibraryManager libraryManager = new LibraryManager();
         UserManager userManager = new UserManager();
         CategoryManager categoryManager = new CategoryManager();
+        BookManager bookManager = new BookManager();
         Scanner scanner = new Scanner(System.in);
         boolean runner = true;
 
         while(runner){
-            System.out.print("Select class <address, author, library, user, category> or Quit: " );
+            System.out.print("Select class <address, author, library, user, category, book> or Quit: " );
             String classSelect = scanner.next();
             switch (classSelect){
                 case "address":{
@@ -60,6 +61,10 @@ public class Terminal {
 
                 case "category":{
                     categoryManager.manage(scanner);
+                    break;
+                }
+                case "book":{
+                    bookManager.manage(scanner);
                     break;
                 }
 

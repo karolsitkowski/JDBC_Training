@@ -37,7 +37,7 @@ public abstract class BaseManager <T,D extends BaseDAO<T>> {
         }
     }
 
-    private void findById(Scanner scanner){
+    protected void findById(Scanner scanner){
         System.out.println("Input ID: ");
         int id = scanner.nextInt();
         T value = dao.findById(id);

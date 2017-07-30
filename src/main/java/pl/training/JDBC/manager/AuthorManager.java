@@ -14,4 +14,6 @@ public class AuthorManager extends BaseManager<Author,AuthorDAO> {
     public AuthorManager(){
         dao = new AuthorDAO();
     }
+
+
 }

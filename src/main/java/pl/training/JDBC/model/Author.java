@@ -69,6 +69,6 @@ public class Author {
         return  "firstName='" + firstName + '\'' +
                 " lastName='" + lastName + '\'' +
                 " address=["  + address + ']' +
-                " books=" + books;
+                " author books=" + books;
     }
 }
