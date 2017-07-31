@@ -16,8 +16,19 @@ public class AddressDAO extends BaseDAO<Address>  {
     }
 
     @Override
-    public Address createObject(ResultSet result) throws SQLException{
+    public Address createFullObject(ResultSet result) throws SQLException{
 
+        Address address = new Address();
+        address.setId(result.getInt(1));
+        address.setAddress(result.getString(2));
+        address.setCity(result.getString(3));
+        address.setPostalCode(result.getString(4));
+
+        return address;
+    }
+
+    @Override
+    public Address createTruncObject(ResultSet result) throws SQLException {
         Address address = new Address();
         address.setId(result.getInt(1));
         address.setAddress(result.getString(2));

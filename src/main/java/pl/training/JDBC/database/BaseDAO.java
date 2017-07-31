@@ -11,7 +11,9 @@ public abstract class BaseDAO<T> {
 
     public abstract String getTableName();
 
-    public abstract T createObject(ResultSet result) throws SQLException;
+    public abstract T createFullObject(ResultSet result) throws SQLException;
+
+    public abstract T createTruncObject(ResultSet result) throws SQLException;
 
     public List<T> findAll(){
 
@@ -24,7 +26,7 @@ public abstract class BaseDAO<T> {
             ResultSet result = statement.executeQuery(sql);) {
             System.out.println(statement.toString());
             while (result.next()){
-                T value = createObject(result);
+                T value = createFullObject(result);
                 values.add(value);
             }
 
@@ -34,7 +36,7 @@ public abstract class BaseDAO<T> {
         return values;
     }
 
-    public T findById(int id){
+    public T findAllInfoById(int id){
 
         String sql = "SELECT * FROM " + getTableName() + " WHERE id = ?";
 
@@ -46,7 +48,28 @@ public abstract class BaseDAO<T> {
             System.out.println(statement.toString());
             try(ResultSet result = statement.executeQuery()){
                 if(result.next()){
-                    value = createObject(result);
+                    value = createFullObject(result);
+                }
+            }
+        } catch (SQLException ex){
+            System.out.println(ex);
+        }
+        return value;
+    }
+
+    public T findTruncInfoById(int id){
+
+        String sql = "SELECT * FROM " + getTableName() + " WHERE id = ?";
+
+        T value = null;
+
+        try(Connection connection = ConnectionFactory.createConnection();
+            PreparedStatement statement = connection.prepareStatement(sql)){
+            statement.setInt(1,id);
+            System.out.println(statement.toString());
+            try(ResultSet result = statement.executeQuery()){
+                if(result.next()){
+                    value = createTruncObject(result);
                 }
             }
         } catch (SQLException ex){

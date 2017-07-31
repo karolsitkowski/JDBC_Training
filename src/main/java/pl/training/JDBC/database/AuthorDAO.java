@@ -17,16 +17,25 @@ public class AuthorDAO extends BaseDAO<Author> {
     }
 
     @Override
-    public Author createObject(ResultSet result) throws SQLException{
+    public Author createFullObject(ResultSet result) throws SQLException{
 
         Author author = new Author();
         author.setId(result.getInt(1));
         AddressDAO addressDAO = new AddressDAO();
-        Address address = addressDAO.findById(result.getInt(2));
+        Address address = addressDAO.findAllInfoById(result.getInt(2));
         author.setAddress(address);
         author.setFirstName(result.getString(3));
         author.setLastName(result.getString(4));
         //TODO Books
+        return author;
+    }
+
+    public Author createTruncObject(ResultSet result) throws SQLException{
+
+        Author author = new Author();
+        author.setId(result.getInt(1));
+        author.setFirstName(result.getString(3));
+        author.setLastName(result.getString(4));
         return author;
     }
 }

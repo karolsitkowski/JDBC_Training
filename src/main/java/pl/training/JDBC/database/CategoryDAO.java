@@ -22,7 +22,7 @@ public class CategoryDAO extends BaseDAO<Category> {
     }
 
     @Override
-    public Category createObject(ResultSet result) throws SQLException {
+    public Category createFullObject(ResultSet result) throws SQLException {
 
         Category category = new Category();
         category.setId(result.getInt(1));
@@ -33,9 +33,18 @@ public class CategoryDAO extends BaseDAO<Category> {
         List<Book> booksAtCategory = new ArrayList<>();
         BookDAO bookDAO = new BookDAO();
         for (String isbn : isbns){
-            booksAtCategory.add(bookDAO.findById(isbn));
+            booksAtCategory.add(bookDAO.findIncompleteById(isbn));
         }
         category.setBooks(booksAtCategory);
+
+        return category;
+    }
+
+    @Override
+    public Category createTruncObject(ResultSet result) throws SQLException {
+        Category category = new Category();
+        category.setId(result.getInt(1));
+        category.setName(result.getString(2));
 
         return category;
     }

@@ -66,9 +66,18 @@ public class Author {
 
     @Override
     public String toString() {
-        return  "firstName='" + firstName + '\'' +
-                " lastName='" + lastName + '\'' +
-                " address=["  + address + ']' +
-                " author books=" + books;
+
+        String print = "firstName='" + firstName + '\'' +
+                        " lastName='" + lastName + '\'';
+
+        if(address != null){
+            print += " address=[" + address + ']';
+        }
+
+        if(books != null){
+            print += " author books=[" + books + ']';
+        }
+
+        return print;
     }
 }

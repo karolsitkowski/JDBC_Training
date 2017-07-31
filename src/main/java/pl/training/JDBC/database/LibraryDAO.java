@@ -17,13 +17,22 @@ public class LibraryDAO extends BaseDAO<Library> {
     }
 
     @Override
-    public Library createObject(ResultSet result) throws SQLException {
+    public Library createFullObject(ResultSet result) throws SQLException {
         Library library = new Library();
         library.setId(result.getInt(1));
         library.setLibName(result.getString(3));
         AddressDAO addressDAO = new AddressDAO();
-        Address address = addressDAO.findById(result.getInt(2));
+        Address address = addressDAO.findTruncInfoById(result.getInt(2));
         library.setAddress(address);
+
+        return library;
+    }
+
+    @Override
+    public Library createTruncObject(ResultSet result) throws SQLException {
+        Library library = new Library();
+        library.setId(result.getInt(1));
+        library.setLibName(result.getString(3));
         return library;
     }
 

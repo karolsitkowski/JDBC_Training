@@ -18,13 +18,25 @@ public class UserDAO extends BaseDAO<User> {
     }
 
     @Override
-    public User createObject(ResultSet result) throws SQLException {
+    public User createFullObject(ResultSet result) throws SQLException {
 
         User user = new User();
         user.setId(result.getInt(1));
         AddressDAO addressDAO = new AddressDAO();
-        Address address = addressDAO.findById(result.getInt(2));
+        Address address = addressDAO.findAllInfoById(result.getInt(2));
         user.setAddress(address);
+        user.setFirstName(result.getString(3));
+        user.setLastName(result.getString(4));
+        user.setGender(User.Gender.valueOf(result.getString(5)));
+        user.setEmail(result.getString(6));
+        user.setPhoneNo(result.getString(7));
+        return user;
+    }
+
+    @Override
+    public User createTruncObject(ResultSet result) throws SQLException {
+        User user = new User();
+        user.setId(result.getInt(1));
         user.setFirstName(result.getString(3));
         user.setLastName(result.getString(4));
         user.setGender(User.Gender.valueOf(result.getString(5)));

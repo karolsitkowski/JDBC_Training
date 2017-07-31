@@ -1,7 +1,6 @@
 package pl.training.JDBC.manager;
 
 import pl.training.JDBC.database.BaseDAO;
-import pl.training.JDBC.model.Address;
 
 import java.util.List;
 import java.util.Scanner;
@@ -40,7 +39,7 @@ public abstract class BaseManager <T,D extends BaseDAO<T>> {
     protected void findById(Scanner scanner){
         System.out.println("Input ID: ");
         int id = scanner.nextInt();
-        T value = dao.findById(id);
+        T value = dao.findAllInfoById(id);
         System.out.println(value);
     }
 }

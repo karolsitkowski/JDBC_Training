@@ -81,12 +81,24 @@ public class Book {
 
     @Override
     public String toString() {
-        return  "isbn='" + isbn + '\'' +
-                " author=[" + author + "]" +
+
+        String print = "Book:[isbn='" + isbn + '\'' +
                 " title='" + title + '\'' +
-                " publishDate='" + publishDate + '\'' +
-                " users=" + users +
-                " libraries=" + libraries +
-                " categories=" + categories +"\n";
+                " author=[" + author + "]";
+                if (users != null){
+                    print += " users=" + users;
+                }
+                if (libraries != null){
+                    print += " libraries=" + libraries;
+                }
+
+                if (categories != null){
+                    print += " categories=" + categories;
+                }
+
+                print += " publishDate='" + publishDate + "]";
+
+        return print;
+
     }
 }
