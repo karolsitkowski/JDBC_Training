@@ -22,14 +22,14 @@ public abstract class BaseDAO<T> {
         try(Connection connection = ConnectionFactory.createConnection();
             Statement statement = connection.createStatement();
             ResultSet result = statement.executeQuery(sql);) {
-
+            System.out.println(statement.toString());
             while (result.next()){
                 T value = createObject(result);
                 values.add(value);
             }
 
         }catch (SQLException ex){
-            System.out.println(ex);
+            ex.printStackTrace();
         }
         return values;
     }
@@ -43,6 +43,7 @@ public abstract class BaseDAO<T> {
         try(Connection connection = ConnectionFactory.createConnection();
             PreparedStatement statement = connection.prepareStatement(sql)){
             statement.setInt(1,id);
+            System.out.println(statement.toString());
             try(ResultSet result = statement.executeQuery()){
                 if(result.next()){
                     value = createObject(result);

@@ -2,11 +2,14 @@ package pl.training.JDBC.database;
 
 import pl.training.JDBC.model.Author;
 import pl.training.JDBC.model.Book;
+import pl.training.JDBC.model.Category;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by sit0 on 30.07.17.
@@ -28,6 +31,15 @@ public class BookDAO extends BaseDAO<Book> {
         book.setAuthor(author);
         book.setTitle(result.getString(3));
         book.setPublishDate(result.getDate(4));
+
+        BooksAtCategoriesDAO booksAtCategoriesDAO = new BooksAtCategoriesDAO();
+        List<Integer> categoriesIds = booksAtCategoriesDAO.idListByIsbn(book.getIsbn());
+        List<Category> categories = new ArrayList<>();
+        CategoryDAO categoryDAO = new CategoryDAO();
+        for (Integer id : categoriesIds){
+            categories.add(categoryDAO.findById(id));
+        }
+        book.setCategories(categories);
 
         return book;
     }

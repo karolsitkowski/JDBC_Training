@@ -84,7 +84,7 @@ public class Book {
         return  "isbn='" + isbn + '\'' +
                 " author=[" + author + "]" +
                 " title='" + title + '\'' +
-                " publishDate=" + publishDate +
+                " publishDate='" + publishDate + '\'' +
                 " users=" + users +
                 " libraries=" + libraries +
                 " categories=" + categories +"\n";

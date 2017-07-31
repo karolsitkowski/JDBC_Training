@@ -6,6 +6,7 @@ import pl.training.JDBC.model.Category;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
@@ -27,12 +28,10 @@ public class CategoryDAO extends BaseDAO<Category> {
         category.setId(result.getInt(1));
         category.setName(result.getString(2));
 
-        ServiceTest serviceTest = new ServiceTest();
-
-        Set<String> isbns = serviceTest.books_at_categories(category.getId());
+        BooksAtCategoriesDAO booksAtCategoriesDAO = new BooksAtCategoriesDAO();
+        List<String> isbns = booksAtCategoriesDAO.isbnListById(category.getId());
+        List<Book> booksAtCategory = new ArrayList<>();
         BookDAO bookDAO = new BookDAO();
-        List<Book> booksAtCategory = new LinkedList<>();
-
         for (String isbn : isbns){
             booksAtCategory.add(bookDAO.findById(isbn));
         }
