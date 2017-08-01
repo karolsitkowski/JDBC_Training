@@ -22,15 +22,18 @@ public class AuthorDAO extends BaseDAO<Author> {
         Author author = new Author();
         author.setId(result.getInt(1));
         AddressDAO addressDAO = new AddressDAO();
-        Address address = addressDAO.findAllInfoById(result.getInt(2));
+        int[] addressColumns = {1,2,3,4};
+        Address address = addressDAO.findParamDataById(result.getInt(2),addressColumns);
         author.setAddress(address);
         author.setFirstName(result.getString(3));
         author.setLastName(result.getString(4));
-        //TODO Books
+        BookDAO bookDAO = new BookDAO();
+        author.setBooks(bookDAO.findBooksByAuthorId(author.getId()));
+
         return author;
     }
 
-    public Author createTruncObject(ResultSet result) throws SQLException{
+    public Author createParamObject(ResultSet result, int[] columns) throws SQLException{
 
         Author author = new Author();
         author.setId(result.getInt(1));

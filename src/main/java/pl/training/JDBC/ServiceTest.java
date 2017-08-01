@@ -1,6 +1,8 @@
 package pl.training.JDBC;
 
+import pl.training.JDBC.database.AddressDAO;
 import pl.training.JDBC.database.ConnectionFactory;
+import pl.training.JDBC.manager.AuthorManager;
 import pl.training.JDBC.model.Address;
 import pl.training.JDBC.model.Book;
 
@@ -15,7 +17,21 @@ import java.util.Set;
  */
 public class ServiceTest {
 
-    public void executeTest(){
+    public static void main(String[] args) {
+
+        test();
+    }
+
+    public static void test() {
+        AddressDAO addressDAO = new AddressDAO();
+        System.out.println(addressDAO.findParamDataById(1,new int[] {2}));
+
+    }
+
+
+
+    /*
+    //public void executeTest(){
         Set<Address> addresses;
         Address address;
 
@@ -33,7 +49,7 @@ public class ServiceTest {
                 System.out.println("Select Id to print");
                 int id = scanner.nextInt();
                 address = addressById(connection, id);
-                String[] columns = address.getColumns();
+                //String[] columns = address.getColumns();
                 System.out.print("Columns -> ");
                 for (String column : columns) {
                     System.out.print(column + " | ");
@@ -48,25 +64,8 @@ public class ServiceTest {
 
 
     //Statment training
-    private Set<Address> addressesDownload(Connection connection) throws SQLException {
-        String sql = "SELECT * FROM addresses";
-
-        Set<Address> addresses = new HashSet<>();
-
-        try (Statement statement = connection.createStatement();
-             ResultSet result = statement.executeQuery(sql)) {
-            while (result.next()) {
-                Address address = new Address();
-                address.setId(result.getInt("id"));
-                address.setAddress(result.getString("address"));
-                address.setCity(result.getString("city"));
-                address.setPostalCode(result.getString("postal_code"));
-                addresses.add(address);
-            }
-        }
-        return addresses;
-    }
-
+  //  private Set<Address> addressesDownload(Connection connection) throws SQLException {
+       //
 
     //PreparedStatement training
     private Address addressById(Connection connection, int id) {
@@ -116,4 +115,5 @@ public class ServiceTest {
 
         return isbns;
     }
+    */
 }

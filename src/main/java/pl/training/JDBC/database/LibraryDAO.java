@@ -22,14 +22,15 @@ public class LibraryDAO extends BaseDAO<Library> {
         library.setId(result.getInt(1));
         library.setLibName(result.getString(3));
         AddressDAO addressDAO = new AddressDAO();
-        Address address = addressDAO.findTruncInfoById(result.getInt(2));
+        int[] addressColumns = {1,2,3,4};
+        Address address = addressDAO.findParamDataById(result.getInt(2), addressColumns);
         library.setAddress(address);
 
         return library;
     }
 
     @Override
-    public Library createTruncObject(ResultSet result) throws SQLException {
+    public Library createParamObject(ResultSet result, int[] columns) throws SQLException {
         Library library = new Library();
         library.setId(result.getInt(1));
         library.setLibName(result.getString(3));

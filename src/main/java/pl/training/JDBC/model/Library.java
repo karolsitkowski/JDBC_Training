@@ -50,8 +50,11 @@ public class Library {
 
     @Override
     public String toString() {
-        return  "Name='" + libName + '\'' +
-                " address=["  + address + ']' +
-                " books=" + books;
+        return "Library{" +
+                "id=" + id +
+                ", address=" + address +
+                ", libName='" + libName + '\'' +
+                ", books=" + books +
+                '}';
     }
 }

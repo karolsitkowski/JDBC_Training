@@ -92,12 +92,15 @@ public class User {
 
     @Override
     public String toString() {
-        return  "firstName='" + firstName + '\'' +
-                " lastName='" + lastName + '\'' +
-                " address=[" + address + "]" +
-                " gender=" + gender +
-                " eMail='" + eMail + '\'' +
-                " phoneNo='" + phoneNo + '\'' +
-                " books=" + books;
+        return "User{" +
+                "id=" + id +
+                ", address=" + address +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", gender=" + gender +
+                ", eMail='" + eMail + '\'' +
+                ", phoneNo='" + phoneNo + '\'' +
+                ", books=" + books +
+                '}';
     }
 }

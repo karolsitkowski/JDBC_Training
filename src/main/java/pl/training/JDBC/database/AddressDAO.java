@@ -28,13 +28,30 @@ public class AddressDAO extends BaseDAO<Address>  {
     }
 
     @Override
-    public Address createTruncObject(ResultSet result) throws SQLException {
+    public Address createParamObject(ResultSet result, int[] columns) throws SQLException {
         Address address = new Address();
-        address.setId(result.getInt(1));
-        address.setAddress(result.getString(2));
-        address.setCity(result.getString(3));
-        address.setPostalCode(result.getString(4));
 
+        for(int i : columns){
+            switch(i){
+                case 1:{
+                    address.setId(result.getInt(1));
+                    break;
+                }
+                case 2:{
+                    address.setAddress(result.getString(2));
+                    break;
+                }
+                case 3:{
+                    address.setCity(result.getString(3));
+                    break;
+                }
+                case 4:{
+                    address.setPostalCode(result.getString(4));
+                    break;
+                }
+
+            }
+        }
         return address;
     }
 }

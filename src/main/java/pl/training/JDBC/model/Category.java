@@ -41,14 +41,10 @@ public class Category {
 
     @Override
     public String toString() {
-
-        String print = "category='" + name + '\'';
-
-        if(books != null){
-            print += " books:\n" + books;
-        }
-
-        return  print;
-
+        return "Category{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", books=" + books +
+                '}';
     }
 }

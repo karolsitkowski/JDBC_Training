@@ -13,18 +13,18 @@ public abstract class BaseDAO<T> {
 
     public abstract T createFullObject(ResultSet result) throws SQLException;
 
-    public abstract T createTruncObject(ResultSet result) throws SQLException;
+    public abstract T createParamObject(ResultSet result, int[] columns) throws SQLException;
 
     public List<T> findAll(){
 
         String sql = "SELECT * FROM " + getTableName();
 
-        List<T> values = new ArrayList<T>();
+        List<T> values = new ArrayList<>();
 
         try(Connection connection = ConnectionFactory.createConnection();
             Statement statement = connection.createStatement();
             ResultSet result = statement.executeQuery(sql);) {
-            System.out.println(statement.toString());
+            System.out.println(statement.toString() + " from findAll() method BaseDAO");
             while (result.next()){
                 T value = createFullObject(result);
                 values.add(value);
@@ -36,7 +36,7 @@ public abstract class BaseDAO<T> {
         return values;
     }
 
-    public T findAllInfoById(int id){
+    public T findAllDataById(int id){
 
         String sql = "SELECT * FROM " + getTableName() + " WHERE id = ?";
 
@@ -45,7 +45,7 @@ public abstract class BaseDAO<T> {
         try(Connection connection = ConnectionFactory.createConnection();
             PreparedStatement statement = connection.prepareStatement(sql)){
             statement.setInt(1,id);
-            System.out.println(statement.toString());
+            System.out.println(statement.toString() + " from findALL in BaseDAO");
             try(ResultSet result = statement.executeQuery()){
                 if(result.next()){
                     value = createFullObject(result);
@@ -57,7 +57,7 @@ public abstract class BaseDAO<T> {
         return value;
     }
 
-    public T findTruncInfoById(int id){
+    public T findParamDataById(int id, int[] columns){
 
         String sql = "SELECT * FROM " + getTableName() + " WHERE id = ?";
 
@@ -66,10 +66,10 @@ public abstract class BaseDAO<T> {
         try(Connection connection = ConnectionFactory.createConnection();
             PreparedStatement statement = connection.prepareStatement(sql)){
             statement.setInt(1,id);
-            System.out.println(statement.toString());
+            System.out.println(statement.toString() + " from fintTrunc() BaseDAO");
             try(ResultSet result = statement.executeQuery()){
                 if(result.next()){
-                    value = createTruncObject(result);
+                    value = createParamObject(result, columns);
                 }
             }
         } catch (SQLException ex){

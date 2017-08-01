@@ -8,7 +8,7 @@ import java.util.List;
  */
 public class Author {
 
-    final String[] columns = {"id", "address_id", "first_name", "last_name"};
+    //final String[] columns = {"id", "address_id", "first_name", "last_name"};
 
     private int id;
 
@@ -20,9 +20,6 @@ public class Author {
 
     private List<Book> books;
 
-    public String[] getColumns() {
-        return columns;
-    }
 
     public int getId() {
         return id;
@@ -66,18 +63,21 @@ public class Author {
 
     @Override
     public String toString() {
+         String toString = "Author{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'';
 
-        String print = "firstName='" + firstName + '\'' +
-                        " lastName='" + lastName + '\'';
-
-        if(address != null){
-            print += " address=[" + address + ']';
+        if (address != null) {
+            toString += ", address=" + address;
         }
 
-        if(books != null){
-            print += " author books=[" + books + ']';
-        }
+        if(books != null) {
+            toString += ", books=" + books;
 
-        return print;
+        }
+        toString += '}';
+
+        return toString;
     }
 }

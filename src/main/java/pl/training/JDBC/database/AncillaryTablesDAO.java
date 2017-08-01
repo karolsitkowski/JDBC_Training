@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Created by sit0 on 30.07.17.
  */
-public abstract class AncillaryTablesBaseDAO {
+public abstract class AncillaryTablesDAO {
 
     public abstract String getTableName();
 

@@ -3,7 +3,7 @@ package pl.training.JDBC.database;
 /**
  * Created by sit0 on 31.07.17.
  */
-public class BooksAtCategoriesDAO extends AncillaryTablesBaseDAO {
+public class BooksAtCategoriesDAO extends AncillaryTablesDAO {
 
     @Override
     public String getTableName() {

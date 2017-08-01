@@ -27,7 +27,8 @@ public class BookDAO extends BaseDAO<Book> {
         Book book = new Book();
         book.setIsbn(result.getString(1));
         AuthorDAO authorDAO = new AuthorDAO();
-        Author author = authorDAO.findTruncInfoById(result.getInt(2));
+        int[] authorColumns = {1,3,4};
+        Author author = authorDAO.findParamDataById(result.getInt(2), authorColumns);
         book.setAuthor(author);
         book.setTitle(result.getString(3));
         book.setPublishDate(result.getDate(4));
@@ -36,19 +37,20 @@ public class BookDAO extends BaseDAO<Book> {
         List<Integer> categoriesIds = booksAtCategoriesDAO.idListByIsbn(book.getIsbn());
         List<Category> categories = new ArrayList<>();
         CategoryDAO categoryDAO = new CategoryDAO();
+        int[] categoryColumns = {1,2};
         for (Integer id : categoriesIds){
-            categories.add(categoryDAO.findTruncInfoById(id));
+            categories.add(categoryDAO.findParamDataById(id, categoryColumns));
         }
         book.setCategories(categories);
 
         return book;
     }
 
-    public Book createTruncObject(ResultSet result) throws SQLException{
+    public Book createParamObject(ResultSet result, int[] columns) throws SQLException{
         Book book = new Book();
         book.setIsbn(result.getString(1));
         AuthorDAO authorDAO = new AuthorDAO();
-        Author author = authorDAO.findTruncInfoById(result.getInt(2));
+        Author author = authorDAO.findParamDataById(result.getInt(2), columns);
         book.setAuthor(author);
         book.setTitle(result.getString(3));
         book.setPublishDate(result.getDate(4));
@@ -66,6 +68,7 @@ public class BookDAO extends BaseDAO<Book> {
         try(Connection connection = ConnectionFactory.createConnection();
             PreparedStatement statement = connection.prepareStatement(sql)){
             statement.setString(1,isbn);
+            System.out.println(statement.toString() + " from findByID Book");
             try(ResultSet result = statement.executeQuery()){
                 if(result.next()){
                     value = createFullObject(result);
@@ -77,7 +80,7 @@ public class BookDAO extends BaseDAO<Book> {
         return value;
     }
 
-    public Book findIncompleteById(String isbn){
+    public Book findParamDataById(String isbn, int[] columns){
 
         String sql = "SELECT * FROM " + getTableName() + " WHERE isbn = ?";
 
@@ -86,9 +89,10 @@ public class BookDAO extends BaseDAO<Book> {
         try(Connection connection = ConnectionFactory.createConnection();
             PreparedStatement statement = connection.prepareStatement(sql)){
             statement.setString(1,isbn);
+            System.out.println(statement.toString() + " from findIncompleteByID Book");
             try(ResultSet result = statement.executeQuery()){
                 if(result.next()){
-                    value = createTruncObject(result);
+                    value = createParamObject(result, columns);
                 }
             }
         } catch (SQLException ex){
@@ -96,6 +100,30 @@ public class BookDAO extends BaseDAO<Book> {
         }
         return value;
     }
+
+    public List<Book> findBooksByAuthorId(int id){
+
+        String sql = "SELECT * FROM " + getTableName() + " WHERE author_id = ?";
+
+        List<Book> books = new ArrayList<>();
+
+        try(Connection connection = ConnectionFactory.createConnection();
+            PreparedStatement statement = connection.prepareStatement(sql)){
+            statement.setInt(1,id);
+            System.out.println(statement.toString() + " from findBooksByAuthorId()");
+            int[] bookColumns = {1,3,4};
+            try(ResultSet result = statement.executeQuery()){
+                while(result.next()){
+                    books.add(createParamObject(result,bookColumns));
+                }
+            }
+        } catch (SQLException ex){
+            System.out.println(ex);
+        }
+        return books;
+    }
+
+
 
 
 }
