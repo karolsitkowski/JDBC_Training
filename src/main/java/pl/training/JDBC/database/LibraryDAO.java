@@ -17,21 +17,33 @@ public class LibraryDAO extends BaseDAO<Library> {
     }
 
     @Override
-    public Library createFullObject(ResultSet result) throws SQLException {
-        Library library = new Library();
-        library.setId(result.getInt(1));
-        library.setLibName(result.getString(3));
-        AddressDAO addressDAO = new AddressDAO();
-        int[] addressColumns = {1,2,3,4};
-        Address address = addressDAO.findParamDataById(result.getInt(2), addressColumns);
-        library.setAddress(address);
-
-        return library;
+    public int[] getAllColumns() {
+        return new int[] {1,2,3,4};
     }
 
     @Override
-    public Library createParamObject(ResultSet result, int[] columns) throws SQLException {
+    public Library createObject(ResultSet result, int[] columns) throws SQLException {
         Library library = new Library();
+        for(int i : columns){
+            switch(i){
+                case 1:{
+                    library.setId(result.getInt(1));
+                    break;
+                }
+                case 2:{
+                    AddressDAO addressDAO = new AddressDAO();
+                    library.setAddress(addressDAO.findDataById(result.getInt(2), new int[]{2,3,4}));
+
+                }
+                case 3:{
+                    library.setLibName(result.getString(3));
+                }
+                case 4:{
+                //TODO
+                }
+            }
+        }
+
         library.setId(result.getInt(1));
         library.setLibName(result.getString(3));
         return library;

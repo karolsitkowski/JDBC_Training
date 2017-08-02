@@ -11,9 +11,9 @@ public abstract class BaseDAO<T> {
 
     public abstract String getTableName();
 
-    public abstract T createFullObject(ResultSet result) throws SQLException;
+    public abstract int[] getAllColumns();
 
-    public abstract T createParamObject(ResultSet result, int[] columns) throws SQLException;
+    public abstract T createObject(ResultSet result, int[] columns) throws SQLException;
 
     public List<T> findAll(){
 
@@ -26,7 +26,7 @@ public abstract class BaseDAO<T> {
             ResultSet result = statement.executeQuery(sql);) {
             System.out.println(statement.toString() + " from findAll() method BaseDAO");
             while (result.next()){
-                T value = createFullObject(result);
+                T value = createObject(result, getAllColumns());
                 values.add(value);
             }
 
@@ -36,7 +36,7 @@ public abstract class BaseDAO<T> {
         return values;
     }
 
-    public T findAllDataById(int id){
+    public T findDataById(int id, int[] columns){
 
         String sql = "SELECT * FROM " + getTableName() + " WHERE id = ?";
 
@@ -45,31 +45,10 @@ public abstract class BaseDAO<T> {
         try(Connection connection = ConnectionFactory.createConnection();
             PreparedStatement statement = connection.prepareStatement(sql)){
             statement.setInt(1,id);
-            System.out.println(statement.toString() + " from findALL in BaseDAO");
+            System.out.println(statement.toString() + " findDataById() from BaseDAO");
             try(ResultSet result = statement.executeQuery()){
                 if(result.next()){
-                    value = createFullObject(result);
-                }
-            }
-        } catch (SQLException ex){
-            System.out.println(ex);
-        }
-        return value;
-    }
-
-    public T findParamDataById(int id, int[] columns){
-
-        String sql = "SELECT * FROM " + getTableName() + " WHERE id = ?";
-
-        T value = null;
-
-        try(Connection connection = ConnectionFactory.createConnection();
-            PreparedStatement statement = connection.prepareStatement(sql)){
-            statement.setInt(1,id);
-            System.out.println(statement.toString() + " from fintTrunc() BaseDAO");
-            try(ResultSet result = statement.executeQuery()){
-                if(result.next()){
-                    value = createParamObject(result, columns);
+                    value = createObject(result, columns);
                 }
             }
         } catch (SQLException ex){

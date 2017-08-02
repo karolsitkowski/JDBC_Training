@@ -16,19 +16,12 @@ public class AddressDAO extends BaseDAO<Address>  {
     }
 
     @Override
-    public Address createFullObject(ResultSet result) throws SQLException{
-
-        Address address = new Address();
-        address.setId(result.getInt(1));
-        address.setAddress(result.getString(2));
-        address.setCity(result.getString(3));
-        address.setPostalCode(result.getString(4));
-
-        return address;
+    public int[] getAllColumns() {
+        return new int[] {1,2,3,4};
     }
 
     @Override
-    public Address createParamObject(ResultSet result, int[] columns) throws SQLException {
+    public Address createObject(ResultSet result, int[] columns) throws SQLException {
         Address address = new Address();
 
         for(int i : columns){
@@ -54,4 +47,5 @@ public class AddressDAO extends BaseDAO<Address>  {
         }
         return address;
     }
+
 }

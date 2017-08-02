@@ -18,30 +18,48 @@ public class UserDAO extends BaseDAO<User> {
     }
 
     @Override
-    public User createFullObject(ResultSet result) throws SQLException {
-
-        User user = new User();
-        user.setId(result.getInt(1));
-        AddressDAO addressDAO = new AddressDAO();
-        Address address = addressDAO.findAllDataById(result.getInt(2));
-        user.setAddress(address);
-        user.setFirstName(result.getString(3));
-        user.setLastName(result.getString(4));
-        user.setGender(User.Gender.valueOf(result.getString(5)));
-        user.setEmail(result.getString(6));
-        user.setPhoneNo(result.getString(7));
-        return user;
+    public int[] getAllColumns() {
+        return new int[] {1,2,3,4,5,6,7,8};
     }
 
     @Override
-    public User createParamObject(ResultSet result, int[] columns) throws SQLException {
+    public User createObject(ResultSet result, int[] columns) throws SQLException {
         User user = new User();
-        user.setId(result.getInt(1));
-        user.setFirstName(result.getString(3));
-        user.setLastName(result.getString(4));
-        user.setGender(User.Gender.valueOf(result.getString(5)));
-        user.setEmail(result.getString(6));
-        user.setPhoneNo(result.getString(7));
+        for(int i : columns){
+            switch (i){
+                case 1:{
+                    user.setId(result.getInt(1));
+                    break;
+                }
+                case 2:{
+                    AddressDAO addressDAO = new AddressDAO();
+                    user.setAddress(addressDAO.findDataById(result.getInt(2),new int[]{2,3,4}));
+                }
+                case 3:{
+                    user.setFirstName(result.getString(3));
+                    break;
+                }
+                case 4:{
+                    user.setLastName(result.getString(4));
+                    break;
+                }
+                case 5:{
+                    user.setGender(User.Gender.valueOf(result.getString(5)));
+                    break;
+                }
+                case 6:{
+                    user.setEmail(result.getString(6));
+                    break;
+                }
+                case 7:{
+                    user.setPhoneNo(result.getString(7));
+                    break;
+                }
+                case 8:{
+                    //TODO
+                }
+            }
+        }
         return user;
     }
 }

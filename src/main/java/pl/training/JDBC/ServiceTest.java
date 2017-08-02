@@ -1,16 +1,6 @@
 package pl.training.JDBC;
 
 import pl.training.JDBC.database.AddressDAO;
-import pl.training.JDBC.database.ConnectionFactory;
-import pl.training.JDBC.manager.AuthorManager;
-import pl.training.JDBC.model.Address;
-import pl.training.JDBC.model.Book;
-
-import java.sql.*;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Scanner;
-import java.util.Set;
 
 /**
  * Created by sit0 on 28.07.17.
@@ -24,7 +14,7 @@ public class ServiceTest {
 
     public static void test() {
         AddressDAO addressDAO = new AddressDAO();
-        System.out.println(addressDAO.findParamDataById(1,new int[] {2}));
+        System.out.println(addressDAO.findDataById(1,new int[] {2}));
 
     }
 

@@ -17,7 +17,7 @@ public class BookManager extends BaseManager<Book,BookDAO> {
     protected void findById(Scanner scanner){
         System.out.println("Input ID: ");
         String id = scanner.next();
-        Book value = dao.findById(id);
+        Book value = dao.findDataById(id,dao.getAllColumns());
         System.out.println(value);
     }
 }
