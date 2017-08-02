@@ -36,10 +36,11 @@ public class LibraryDAO extends BaseDAO<Library> {
                 case 2:{
                     AddressDAO addressDAO = new AddressDAO();
                     library.setAddress(addressDAO.findDataById(result.getInt(2), new int[]{2,3,4}));
-
+                    break;
                 }
                 case 3:{
                     library.setLibName(result.getString(3));
+                    break;
                 }
                 case 4:{
                     BooksAtLibrariesDAO booksAtLibrariesDAO = new BooksAtLibrariesDAO();
@@ -50,6 +51,7 @@ public class LibraryDAO extends BaseDAO<Library> {
                         books.add(bookDAO.findDataById(isbn,new int[]{2,3,4}));
                     }
                     library.setBooks(books);
+                    break;
                 }
             }
         }

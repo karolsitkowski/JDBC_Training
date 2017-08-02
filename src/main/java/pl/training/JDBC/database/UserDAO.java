@@ -37,6 +37,7 @@ public class UserDAO extends BaseDAO<User> {
                 case 2:{
                     AddressDAO addressDAO = new AddressDAO();
                     user.setAddress(addressDAO.findDataById(result.getInt(2),new int[]{2,3,4}));
+                    break;
                 }
                 case 3:{
                     user.setFirstName(result.getString(3));
@@ -68,7 +69,6 @@ public class UserDAO extends BaseDAO<User> {
                     }
                     user.setBooks(books);
                     break;
-
                 }
             }
         }

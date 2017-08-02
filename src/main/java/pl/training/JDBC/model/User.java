@@ -97,14 +97,20 @@ public class User {
         if (id != 0) {
             toString += "id=" + id;
         }
-        toString += ", firstName='" + firstName + '\'' +
+        toString += "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'';
         if (address != null) {
             toString += ", address=" + address;
         }
-        toString += ", gender=" + gender +
-                ", eMail='" + eMail + '\'' +
-                ", phoneNo='" + phoneNo + '\'';
+        if(gender != null){
+            toString += ", gender=" + gender;
+        }
+        if(eMail != null){
+            toString += ", eMail='" + eMail + '\'';
+        }
+        if(phoneNo != null){
+            toString += ", phoneNo='" + phoneNo + '\'';
+        }
         if (books != null) {
             toString += ", books=" + books;
         }

@@ -1,8 +1,6 @@
 package pl.training.JDBC.database;
 
-import pl.training.JDBC.model.Author;
-import pl.training.JDBC.model.Book;
-import pl.training.JDBC.model.Category;
+import pl.training.JDBC.model.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -50,14 +48,30 @@ public class BookDAO extends BaseDAO<Book> {
                     break;
                 }
                 case 5:{
-
+                    BooksAtUsersDAO booksAtUsersDAO = new BooksAtUsersDAO();
+                    List<Integer> usersIds = booksAtUsersDAO.idListByIsbn(result.getString(1));
+                    List<User> users = new ArrayList<>();
+                    UserDAO userDAO = new UserDAO();
+                    for(Integer id : usersIds){
+                        users.add(userDAO.findDataById(id,new int[]{3,4}));
+                    }
+                    book.setUsers(users);
+                    break;
                 }
                 case 6:{
-
+                    BooksAtLibrariesDAO booksAtLibrariesDAO = new BooksAtLibrariesDAO();
+                    List<Integer> librariesIds = booksAtLibrariesDAO.idListByIsbn(result.getString(1));
+                    List<Library> libraries = new ArrayList<>();
+                    LibraryDAO libraryDAO = new LibraryDAO();
+                    for (Integer id : librariesIds){
+                        libraries.add(libraryDAO.findDataById(id,new int[]{3}));
+                    }
+                    book.setLibraries(libraries);
+                    break;
                 }
                 case 7:{
                     BooksAtCategoriesDAO booksAtCategoriesDAO = new BooksAtCategoriesDAO();
-                    List<Integer> categoriesIds = booksAtCategoriesDAO.idListByIsbn(book.getIsbn());
+                    List<Integer> categoriesIds = booksAtCategoriesDAO.idListByIsbn(result.getString(1));
                     List<Category> categories = new ArrayList<>();
                     CategoryDAO categoryDAO = new CategoryDAO();
                     for (Integer id : categoriesIds){

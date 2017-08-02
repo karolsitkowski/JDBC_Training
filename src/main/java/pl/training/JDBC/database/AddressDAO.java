@@ -42,7 +42,6 @@ public class AddressDAO extends BaseDAO<Address>  {
                     address.setPostalCode(result.getString(4));
                     break;
                 }
-
             }
         }
         return address;

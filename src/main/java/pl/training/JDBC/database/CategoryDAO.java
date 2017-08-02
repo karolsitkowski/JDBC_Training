@@ -46,6 +46,7 @@ public class CategoryDAO extends BaseDAO<Category> {
                         books.add(bookDAO.findDataById(isbn,new int[] {2,3,4}));
                     }
                     category.setBooks(books);
+                    break;
                 }
             }
         }
