@@ -63,18 +63,18 @@ public class Author {
 
     @Override
     public String toString() {
-         String toString = "Author{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'';
 
+        String toString = "Author{";
+        if (id != 0) {
+            toString += "id=" + id + " ,";
+        }
+        toString += "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'';
         if (address != null) {
             toString += ", address=" + address;
         }
-
         if(books != null) {
             toString += ", books=" + books;
-
         }
         toString += '}';
 

@@ -41,10 +41,17 @@ public class Category {
 
     @Override
     public String toString() {
-        return "Category{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", books=" + books +
-                '}';
+
+        String toString = "Category{";
+        if(id != 0){
+            toString += "id=" + id + ", ";
+        }
+        toString += "name='" + name + '\'';
+        if(books != null){
+            toString += ", books=" + books;
+        }
+        toString += '}';
+
+        return toString;
     }
 }

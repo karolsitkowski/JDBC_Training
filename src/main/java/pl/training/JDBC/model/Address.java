@@ -7,8 +7,6 @@ import java.util.Arrays;
  */
 public class Address {
 
-    //final String [] columns = {"id", "address", "city", "postal_code"};
-
     private int id;
 
     private String address;
@@ -52,11 +50,17 @@ public class Address {
 
     @Override
     public String toString() {
-        return "Address{" +
-                "id=" + id +
-                ", street='" + address + '\'' +
+
+        String toString = "Address{";
+        if(id != 0){
+            toString +=  "id, =" + id;
+        }
+        toString+=
+                "street='" + address + '\'' +
                 ", city='" + city + '\'' +
                 ", postalCode='" + postalCode + '\'' +
                 '}';
+
+        return toString;
     }
 }

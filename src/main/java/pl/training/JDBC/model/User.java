@@ -92,15 +92,24 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", address=" + address +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", gender=" + gender +
+
+        String toString = "User{";
+        if (id != 0) {
+            toString += "id=" + id;
+        }
+        toString += ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'';
+        if (address != null) {
+            toString += ", address=" + address;
+        }
+        toString += ", gender=" + gender +
                 ", eMail='" + eMail + '\'' +
-                ", phoneNo='" + phoneNo + '\'' +
-                ", books=" + books +
-                '}';
+                ", phoneNo='" + phoneNo + '\'';
+        if (books != null) {
+            toString += ", books=" + books;
+        }
+        toString += '}';
+
+        return toString;
     }
 }

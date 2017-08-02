@@ -1,10 +1,13 @@
 package pl.training.JDBC.database;
 
 import pl.training.JDBC.model.Address;
+import pl.training.JDBC.model.Book;
 import pl.training.JDBC.model.User;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by sit0 on 30.07.17.
@@ -56,7 +59,16 @@ public class UserDAO extends BaseDAO<User> {
                     break;
                 }
                 case 8:{
-                    //TODO
+                    BooksAtUsersDAO booksAtUsersDAO = new BooksAtUsersDAO();
+                    List<String> isbns = booksAtUsersDAO.isbnListById(result.getInt(1));
+                    BookDAO bookDAO = new BookDAO();
+                    List<Book> books = new ArrayList<>();
+                    for (String isbn : isbns){
+                        books.add(bookDAO.findDataById(isbn,new int[]{2,3,4}));
+                    }
+                    user.setBooks(books);
+                    break;
+
                 }
             }
         }

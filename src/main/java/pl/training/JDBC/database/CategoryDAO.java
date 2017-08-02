@@ -39,13 +39,13 @@ public class CategoryDAO extends BaseDAO<Category> {
                 }
                 case 3:{
                     BooksAtCategoriesDAO booksAtCategoriesDAO = new BooksAtCategoriesDAO();
-                    List<String> isbns = booksAtCategoriesDAO.isbnListById(category.getId());
-                    List<Book> booksAtCategory = new ArrayList<>();
+                    List<String> isbns = booksAtCategoriesDAO.isbnListById(result.getInt(1));
+                    List<Book> books = new ArrayList<>();
                     BookDAO bookDAO = new BookDAO();
                     for (String isbn : isbns){
-                        booksAtCategory.add(bookDAO.findDataById(isbn,new int[] {1,2,3,4}));
+                        books.add(bookDAO.findDataById(isbn,new int[] {2,3,4}));
                     }
-                    category.setBooks(booksAtCategory);
+                    category.setBooks(books);
                 }
             }
         }

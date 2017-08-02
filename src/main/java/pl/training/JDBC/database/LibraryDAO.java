@@ -1,10 +1,13 @@
 package pl.training.JDBC.database;
 
 import pl.training.JDBC.model.Address;
+import pl.training.JDBC.model.Book;
 import pl.training.JDBC.model.Library;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by sit0 on 29.07.17.
@@ -39,13 +42,18 @@ public class LibraryDAO extends BaseDAO<Library> {
                     library.setLibName(result.getString(3));
                 }
                 case 4:{
-                //TODO
+                    BooksAtLibrariesDAO booksAtLibrariesDAO = new BooksAtLibrariesDAO();
+                    List<String> isbns = booksAtLibrariesDAO.isbnListById(result.getInt(1));
+                    List<Book> books = new ArrayList<>();
+                    BookDAO bookDAO = new BookDAO();
+                    for(String isbn : isbns){
+                        books.add(bookDAO.findDataById(isbn,new int[]{2,3,4}));
+                    }
+                    library.setBooks(books);
                 }
             }
         }
 
-        library.setId(result.getInt(1));
-        library.setLibName(result.getString(3));
         return library;
     }
 

@@ -51,8 +51,6 @@ public class AuthorDAO extends BaseDAO<Author> {
                     author.setBooks(bookDAO.findBooksByAuthorId(result.getInt(1)));
                     break;
                 }
-
-
             }
         }
         return author;
